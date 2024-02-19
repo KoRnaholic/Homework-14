@@ -9,6 +9,51 @@ body {
     background: linear-gradient(to right, #c850c0, #4158d0, #c850c0);
 }
 
+h1{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgb(255, 221, 0);
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+label {
+    font-size: 26px;
+    margin-right: 10px;
+color: white;
+}
+
+select {
+    padding: 6px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #c850c0;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: blue;
+}
+
+
 .poke_container{
     display: flex;
     flex-wrap: wrap;

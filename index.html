@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/styles/styles.css"></link>
-    <title>Document</title>
+    <title>Pokadex</title>
 </head>
 <body>
-    <h1>Pokedex</h1>
+    <h1>Pokedex App</h1>
+    <div class="search-container">
+        <label for="pokemon-type">Select a Pokémon type</label>
+        <select id="pokemon-type">
+            <option value="normal">Normal</option>
+            <option value="fire">Fire</option>
+            <option value="water">Water</option>
+            <option value="grass">Grass</option>
+            <option value="bug">Bug</option>
+            <!-- Add more options for other types -->
+        </select>
+        
+        <input type="submit" value="Search">
+    </div>
     <div class="poke_container" id="poke_container">
     </div>
     <button class="btn" id="startTeam">Start Your Team</button>

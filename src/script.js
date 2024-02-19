@@ -1,11 +1,7 @@
 const poke_container = document.getElementById("poke_container");
 const startTeam = document.getElementById("startTeam");
 startTeam.style.display = "none";
-
-const url ="https://pokeapi.co/api/v2/type/{id or name}/"
-
-
-const pokemon_count = 20;
+const pokemon_count = 40;
 
 const getPokemons = async () => {
   for (let i = 1; i <= pokemon_count; i++) {
@@ -33,6 +29,7 @@ const colours = {
   fairy: "#D685AD",
 };
 const main_types = Object.keys(colours);
+
 const fetchPokemons = async (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const res = await fetch(url);
@@ -67,10 +64,6 @@ const createPokemonCard = (pokemon) => {
             
         </div>
     `;
-   
-
-    
-    // Show the dropdown menu on right-click
     pokemonEl.addEventListener('contextmenu', function(e) {
        
         const menu = document.createElement("div");
@@ -92,7 +85,6 @@ const createPokemonCard = (pokemon) => {
             if (!menu.contains(event.target)) {
                 menu.style.display = 'none';
             }
-
           menu.remove();
         });
 
@@ -103,8 +95,6 @@ const createPokemonCard = (pokemon) => {
           });
 
           document.getElementById("choosePokemon").addEventListener("click", () => {
-            // Implement add multiple pokemons functionality
-      
             prokeArr.push(pokemon.id);
       
             if (prokeArr.length < 5) {
@@ -117,16 +107,34 @@ const createPokemonCard = (pokemon) => {
             } else {
               alert("You can choose only 5 pokemons");
             }
-      
-            // Remove the menu after selection
             menu.remove();
           });
     });
 
-    // Hide the dropdown menu on click outside
+    
     pokemonEl.innerHTML=pokemonInnerHTML;
 
     poke_container.appendChild(pokemonEl)
+};
+document.querySelector('input[type="submit"]').addEventListener('click', function(event) {
+  event.preventDefault(); 
+  
+  const selectedType = document.getElementById('pokemon-type').value;
+  fetchPokemons2(selectedType);
+});
+
+const fetchPokemons2 = async (type) => {
+  const url = `https://pokeapi.co/api/v2/type/${type}/`;
+  const res = await fetch(url);
+  const data = await res.json();
+ 
+  poke_container.innerHTML = '';
+
+  data.pokemon.forEach(async (poke) => {
+    const res = await fetch(poke.pokemon.url);
+    const pokemonData = await res.json();
+    createPokemonCard(pokemonData);
+  });
 };
 
 getPokemons();
