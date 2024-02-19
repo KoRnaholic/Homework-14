@@ -1,5 +1,9 @@
 const poke_container = document.getElementById("poke_container");
-console.log(poke_container)
+const startTeam = document.getElementById("startTeam");
+startTeam.style.display = "none";
+
+const url ="https://pokeapi.co/api/v2/type/{id or name}/"
+
 
 const pokemon_count = 20;
 
@@ -33,7 +37,7 @@ const fetchPokemons = async (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data)
+
   createPokemonCard(data);
 };
 let prokeArr = [];
@@ -42,6 +46,14 @@ const createPokemonCard = (pokemon) => {
     pokemonEl.classList.add("pokemon");
     let {name,id, sprites, types} = pokemon;
      id = pokemon.id.toString().padStart(3, "0");
+
+     const poke_types = pokemon.types.map((type) => type.type.name);
+  const type = main_types.find((type) => poke_types.indexOf(type) >= 0);
+  pokemonEl.classList.add(type);
+  const color = colours[type];
+  pokemonEl.style.backgroundColor = color;
+
+ 
  
     const pokemonInnerHTML = `
         <div class="img-container">
@@ -51,8 +63,67 @@ const createPokemonCard = (pokemon) => {
             <span class="number">#${id}</span>
             <h3 class="name">${name}</h3>
             <small class="type">Type:<span>${types[0].type.name}</span></small>
+            
+            
         </div>
     `;
+   
+
+    
+    // Show the dropdown menu on right-click
+    pokemonEl.addEventListener('contextmenu', function(e) {
+       
+        const menu = document.createElement("div");
+        
+        e.preventDefault(); // Prevent the default context menu
+        menu.style.display = 'block';
+        menu.style.left = e.pageX + 'px';
+        menu.style.top = e.pageY + 'px';
+        menu.classList.add("dropdown")
+
+        menu.innerHTML = `
+                    <a href="#" id="viewDetails">View Details</a>
+                    <a href="#" id="choosePokemon">Choose Pokemon</a>
+                    <a href="#">Action 3</a> 
+        `;
+        document.body.appendChild(menu);
+
+        document.addEventListener('click', function(event) {
+            if (!menu.contains(event.target)) {
+                menu.style.display = 'none';
+            }
+
+          menu.remove();
+        });
+
+        document.getElementById("viewDetails").addEventListener("click", () => {
+            window.location.href = `description.html?id=${pokemon.id}`;
+            // Remove the menu after selection
+            menu.remove();
+          });
+
+          document.getElementById("choosePokemon").addEventListener("click", () => {
+            // Implement add multiple pokemons functionality
+      
+            prokeArr.push(pokemon.id);
+      
+            if (prokeArr.length < 5) {
+              console.log(prokeArr);
+            } else if (prokeArr.length == 5) {
+              startTeam.style.display = "block";
+              startTeam.addEventListener("click", () => {
+                window.location.href = `battle.html?id=${prokeArr}`;
+              });
+            } else {
+              alert("You can choose only 5 pokemons");
+            }
+      
+            // Remove the menu after selection
+            menu.remove();
+          });
+    });
+
+    // Hide the dropdown menu on click outside
     pokemonEl.innerHTML=pokemonInnerHTML;
 
     poke_container.appendChild(pokemonEl)
