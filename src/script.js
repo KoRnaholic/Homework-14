@@ -68,7 +68,7 @@ const createPokemonCard = (pokemon) => {
        
         const menu = document.createElement("div");
         
-        e.preventDefault(); // Prevent the default context menu
+        e.preventDefault(); 
         menu.style.display = 'block';
         menu.style.left = e.pageX + 'px';
         menu.style.top = e.pageY + 'px';
@@ -89,7 +89,6 @@ const createPokemonCard = (pokemon) => {
 
         document.getElementById("viewDetails").addEventListener("click", () => {
             window.location.href = `description.html?id=${pokemon.id}`;
-            // Remove the menu after selection
             menu.remove();
           });
 

@@ -8,7 +8,7 @@ console.log(splitId);
 const getRandomPokemonIds = () => {
   const randomIds = [];
   while (randomIds.length < 5) {
-    const randomId = Math.floor(Math.random() * 898) + 1; // Assuming 898 is the total number of Pokémon
+    const randomId = Math.floor(Math.random() * 200) + 1; 
     if (!randomIds.includes(randomId)) {
       randomIds.push(randomId);
     }
