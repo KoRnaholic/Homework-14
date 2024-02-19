@@ -68,6 +68,8 @@ input[type="submit"]:hover {
     align-items: space-between;
     justify-content: center;
     margin: 0 auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
 }
 
 .pokemon{
@@ -77,6 +79,10 @@ input[type="submit"]:hover {
     margin: 10px;
     padding: 20px;
     text-align: center;
+}
+.pokemon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .pokemon .img-container{
@@ -125,11 +131,14 @@ input[type="submit"]:hover {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    
 }
 
 /* Dropdown items on hover */
 .dropdown a:hover {
-    background-color: #f1f1f1;
+    color: white;
+    /* background-color: #f1f1f1; */
+    background-color: #c850c0;
 }
 
 .btn{

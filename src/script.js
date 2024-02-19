@@ -77,7 +77,6 @@ const createPokemonCard = (pokemon) => {
         menu.innerHTML = `
                     <a href="#" id="viewDetails">View Details</a>
                     <a href="#" id="choosePokemon">Choose Pokemon</a>
-                    <a href="#">Action 3</a> 
         `;
         document.body.appendChild(menu);
 
